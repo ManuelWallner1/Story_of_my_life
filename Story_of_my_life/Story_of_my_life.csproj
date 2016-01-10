@@ -33,6 +33,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>book.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -181,6 +185,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Blood.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Download.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="book.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\book.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

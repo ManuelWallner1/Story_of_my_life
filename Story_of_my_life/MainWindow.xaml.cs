@@ -26,7 +26,7 @@ namespace Story_of_my_life
     {
         WMPLib.WindowsMediaPlayer player = new WindowsMediaPlayer();
         public event PropertyChangedEventHandler PropertyChanged;
-        int volume=5;
+        int volume = 5;
         string resolution = "525x350";
         string pathSaveData = "C:\\Users\\Manuel\\Documents\\Visual Studio 2013\\Projects\\Story_of_my_life\\Properties.txt";
         private int _height;
@@ -67,15 +67,15 @@ namespace Story_of_my_life
         {
             InitializeComponent();
             this.DataContext = this;
-
+            
             string p = AppDomain.CurrentDomain.BaseDirectory;
             string[] a = p.Split('\\');
-            string pathFile="";
-            for (int i = 0;i<a.Length ;i++ )
+            string pathFile = "";
+            for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] == "Story_of_my_life")
                 {
-                    pathFile += a[i]+"\\";
+                    pathFile += a[i] + "\\";
                     break;
                 }
                 pathFile += a[i] + "\\";
@@ -85,7 +85,7 @@ namespace Story_of_my_life
             CustomWidth = 525;
             player.URL = pathFile;
             player.settings.setMode("loop", true);
-            player.settings.volume=5;
+            player.settings.volume = 5;
         }
 
         private void OptionGif_MediaEnded(object sender, RoutedEventArgs e)
@@ -106,7 +106,7 @@ namespace Story_of_my_life
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -130,7 +130,7 @@ namespace Story_of_my_life
             StreamWriter myWriter;
             if (System.IO.File.Exists(pathSaveData))
             {
-                using ( myWriter = new StreamWriter(pathSaveData))
+                using (myWriter = new StreamWriter(pathSaveData))
                 {
                     myWriter.Write(String.Empty);
                     myWriter.WriteLine(volume.ToString());
@@ -142,8 +142,8 @@ namespace Story_of_my_life
             {
                 using (myWriter = File.CreateText(pathSaveData))
                 {
-                    myWriter.WriteLine("Volume: "+volume.ToString());
-                    myWriter.WriteLine("Resolution: "+resolution);
+                    myWriter.WriteLine("Volume: " + volume.ToString());
+                    myWriter.WriteLine("Resolution: " + resolution);
                     myWriter.Close();
                 }
             }
@@ -188,19 +188,19 @@ namespace Story_of_my_life
             {
                 this.WindowState = WindowState.Normal;
                 CustomWidth = 1280;
-                CustomHeight=720;
+                CustomHeight = 720;
             }
             else if (resolution == "min")
             {
                 this.WindowState = WindowState.Normal;
                 CustomWidth = 640;
-                CustomHeight=480;
+                CustomHeight = 480;
             }
             else if (resolution == "norm")
             {
                 this.WindowState = WindowState.Normal;
                 CustomWidth = 525;
-                CustomHeight=350;
+                CustomHeight = 350;
             }
         }
 
