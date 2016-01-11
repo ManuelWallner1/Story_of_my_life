@@ -19,21 +19,21 @@ using System.IO;
 
 namespace Story_of_my_life
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
+        #region Variablen
         WMPLib.WindowsMediaPlayer player = new WindowsMediaPlayer();
         public event PropertyChangedEventHandler PropertyChanged;
         int volume = 5;
         string resolution = "525x350";
-        string pathSaveData = "C:\\Users\\Manuel\\Documents\\Visual Studio 2013\\Projects\\Story_of_my_life\\Properties.txt";
+        string pathSaveData;
         private int _height;
         private int _width;
 
+        #endregion
 
-
+        #region ChangeWindowAppSize
         public int CustomHeight
         {
             get { return _height; }
@@ -61,13 +61,15 @@ namespace Story_of_my_life
             }
         }
 
-
+        #endregion
 
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = this;
-            
+
+            #region SongFix
+            //Dateipfad für song festlegen
             string p = AppDomain.CurrentDomain.BaseDirectory;
             string[] a = p.Split('\\');
             string pathFile = "";
@@ -80,9 +82,13 @@ namespace Story_of_my_life
                 }
                 pathFile += a[i] + "\\";
             }
+            pathSaveData = pathFile + "Properties.txt";
             pathFile += "The Walking Dead Original Soundtrack - Theme Song HD.wav";
+            #endregion
+
             CustomHeight = 350;
             CustomWidth = 525;
+
             player.URL = pathFile;
             player.settings.setMode("loop", true);
             player.settings.volume = 5;
@@ -106,7 +112,8 @@ namespace Story_of_my_life
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-
+            stackpanel1.Visibility = Visibility.Collapsed;
+            LStory.Visibility = Visibility.Collapsed;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -125,6 +132,7 @@ namespace Story_of_my_life
 
         }
 
+        #region SaveOptionData
         public void SaveChanges(int volume, string resolution)
         {
             StreamWriter myWriter;
@@ -163,6 +171,7 @@ namespace Story_of_my_life
                 }
             }
         }
+        #endregion
 
         private void Slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
