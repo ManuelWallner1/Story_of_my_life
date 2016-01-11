@@ -70,26 +70,27 @@ namespace Story_of_my_life
 
             #region SongFix
             //Dateipfad für song festlegen
-            string p = AppDomain.CurrentDomain.BaseDirectory;
-            string[] a = p.Split('\\');
-            string pathFile = "";
-            for (int i = 0; i < a.Length; i++)
-            {
-                if (a[i] == "Story_of_my_life")
-                {
-                    pathFile += a[i] + "\\";
-                    break;
-                }
-                pathFile += a[i] + "\\";
-            }
-            pathSaveData = pathFile + "Properties.txt";
-            pathFile += "The Walking Dead Original Soundtrack - Theme Song HD.wav";
+            //string p = AppDomain.CurrentDomain.BaseDirectory;
+            //string[] a = p.Split('\\');
+            //string pathFile = "";
+            //for (int i = 0; i <= a.Length; i++)
+            //{
+            //    if (a[i] == "Story_of_my_life")
+            //    {
+            //        pathFile += a[i] + "\\";
+            //        break;
+            //    }
+            //    pathFile += a[i] + "\\";
+            //}
+            string b = Resource.get_File_Path("The Walking Dead Original Soundtrack - Theme Song HD.wav");
+            pathSaveData = System.IO.Path.GetFullPath(Resource.Resource_Path + "..\\" + "Properties.txt");
+            //pathFile += "The Walking Dead Original Soundtrack - Theme Song HD.wav";
             #endregion
 
             CustomHeight = 350;
             CustomWidth = 525;
 
-            player.URL = pathFile;
+            player.URL = Resource.get_File_Path("The Walking Dead Original Soundtrack - Theme Song HD.wav"); 
             player.settings.setMode("loop", true);
             player.settings.volume = 5;
         }
@@ -106,7 +107,7 @@ namespace Story_of_my_life
             stackpanel1.Visibility = Visibility.Collapsed;
             stackpanel2.Visibility = Visibility.Visible;
             l0.Visibility = Visibility.Visible;
-            OptionsGif.Source = new Uri(AppDomain.CurrentDomain.BaseDirectory + "Blood.gif");
+            OptionsGif.Source = new Uri(Resource.get_File_Path("Blood.gif"));
             OptionsGif.Visibility = Visibility.Visible;
         }
 
