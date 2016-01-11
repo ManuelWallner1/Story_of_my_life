@@ -114,6 +114,9 @@ namespace Story_of_my_life
         {
             stackpanel1.Visibility = Visibility.Collapsed;
             LStory.Visibility = Visibility.Collapsed;
+
+
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -213,5 +216,23 @@ namespace Story_of_my_life
             }
         }
 
+        private void _KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    break;
+                case Key.Up:
+                    break;
+                case Key.Down:
+                    break;
+                case Key.Left:
+                    break;
+                case Key.Right:
+                    break;
+                case Key.Enter:
+                    break;
+            }
+        }
     }
 }
