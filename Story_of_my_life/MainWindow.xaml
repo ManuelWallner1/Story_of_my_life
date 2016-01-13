@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="STORY OF MY LIFE" Height="{Binding CustomHeight, Mode=TwoWay}" Width="{Binding CustomWidth, Mode=TwoWay}" Loaded="Window_Loaded" 
         WindowStartupLocation="CenterScreen" BorderThickness="1" AllowsTransparency="True" WindowStyle="None" WindowState="Normal" Icon="Images/book.ico"
-         KeyDown="_KeyDown">
+         KeyDown="Main_KeyDown">
 
     <Window.Resources>
         <Style x:Key="RoundButtonTemplate" TargetType="Button">
@@ -26,9 +26,15 @@
 
     <Grid Name="Grid1">
         <Grid.Background>
-            <ImageBrush ImageSource="Images/Th353Y7.jpg"></ImageBrush>
+            <ImageBrush ></ImageBrush>
         </Grid.Background>
-
+        
+        <Rectangle x:Name="esc" Height="{Binding CustomHeight, Mode=TwoWay}" Width="{Binding CustomWidth, Mode=TwoWay}" Opacity="0.5" >
+            <Rectangle.Fill>
+                <ImageBrush />
+            </Rectangle.Fill>
+        </Rectangle>
+        
         <StackPanel Name="stackpanel1" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,100,0">
             <Button Focusable="True"
                 Style="{StaticResource RoundButtonTemplate}"
@@ -93,5 +99,35 @@
         </StackPanel>
 
         <Label Name="Version" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="White" FontSize="10" Content="Version 1.0"/>
+
+
+        <StackPanel x:Name="stackpanel3" Visibility="Collapsed">
+            <Border BorderBrush="White" BorderThickness="10" Height="230" Width="200" Opacity="0.5" Margin="0,10,0,0"/>
+
+            <Button Focusable="True"
+                Style="{StaticResource RoundButtonTemplate}"
+                Width="101" Height="45" 
+                Grid.Row="0" Margin="0,-200,0,0"
+                HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="#FFF"
+                Name="OptionButton2" Click="OptionButton_Click2" 
+                Content="Options" FontSize="25">
+            </Button>
+            <Button Focusable="True"
+                Style="{StaticResource RoundButtonTemplate}"
+                Width="101" Height="45" 
+                Grid.Row="0" Margin="0,-140,0,0"
+                HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="#FFF"
+                Name="Save" Click="SaveButton_Click" 
+                Content="Save" FontSize="25">
+            </Button>
+            <Button Focusable="True"
+                Style="{StaticResource RoundButtonTemplate}"
+                Width="101" Height="45" 
+                Grid.Row="0" Margin="0,-80,0,0"
+                HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="#FFF"
+                Name="Resume" Click="ResumeButton_Click" 
+                Content="Resume" FontSize="25">
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

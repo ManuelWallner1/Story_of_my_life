@@ -103,6 +103,16 @@ namespace Story_of_my_life {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EscapePic {
+            get {
+                object obj = ResourceManager.GetObject("EscapePic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Th353Y7 {
             get {
                 object obj = ResourceManager.GetObject("Th353Y7", resourceCulture);

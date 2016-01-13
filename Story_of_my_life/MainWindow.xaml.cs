@@ -30,7 +30,18 @@ namespace Story_of_my_life
         string pathSaveData;
         private int _height;
         private int _width;
+        Boolean esc_active = false;
 
+        enum STATE {
+            MENU,
+            GAME,
+            PAUSE,
+            OptionMain,
+            SAVE
+        };
+
+        STATE value;
+        STATE option;
         #endregion
 
         #region ChangeWindowAppSize
@@ -67,40 +78,76 @@ namespace Story_of_my_life
         {
             InitializeComponent();
             this.DataContext = this;
+            value = STATE.MENU;
 
             #region SongFix
-            //Dateipfad für song festlegen
-            //string p = AppDomain.CurrentDomain.BaseDirectory;
-            //string[] a = p.Split('\\');
-            //string pathFile = "";
-            //for (int i = 0; i <= a.Length; i++)
-            //{
-            //    if (a[i] == "Story_of_my_life")
-            //    {
-            //        pathFile += a[i] + "\\";
-            //        break;
-            //    }
-            //    pathFile += a[i] + "\\";
-            //}
             string b = Resource.get_File_Path("The Walking Dead Original Soundtrack - Theme Song HD.wav");
             pathSaveData = System.IO.Path.GetFullPath(Resource.Resource_Path + "..\\" + "Properties.txt");
-            //pathFile += "The Walking Dead Original Soundtrack - Theme Song HD.wav";
             #endregion
 
+            #region Windowsize
             CustomHeight = 350;
             CustomWidth = 525;
+            #endregion
 
+            #region Playing_Window_Sound
             player.URL = Resource.get_File_Path("The Walking Dead Original Soundtrack - Theme Song HD.wav"); 
             player.settings.setMode("loop", true);
             player.settings.volume = 5;
+            #endregion
+
+            #region Setting_Background
+            ImageBrush imgBrush = new ImageBrush();
+            imgBrush.ImageSource = new BitmapImage(new Uri(Resource.get_File_Path("Th353Y7.jpg"), UriKind.Relative));
+            Grid1.Background = imgBrush;
+            #endregion
+
         }
 
-        private void OptionGif_MediaEnded(object sender, RoutedEventArgs e)
+
+        #region ButtonMainMenu
+
+
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            OptionsGif.Position = new TimeSpan(0, 0, 1);
-            OptionsGif.Play();
+            stackpanel1.Visibility = Visibility.Collapsed;
+            LStory.Visibility = Visibility.Collapsed;
+            value = STATE.GAME;
+            //GamePlay
+
+
         }
 
+        private void BacktoMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (option == STATE.OptionMain)
+            {
+                stackpanel1.Visibility = Visibility.Visible;
+                stackpanel2.Visibility = Visibility.Collapsed;
+                l0.Visibility = Visibility.Collapsed;
+                OptionsGif.Visibility = Visibility.Collapsed;
+                SaveChanges(volume, resolution);
+            }
+            else if(option == STATE.PAUSE)
+            {
+                stackpanel3.Visibility = Visibility.Visible;
+                stackpanel2.Visibility = Visibility.Collapsed;
+                l0.Visibility = Visibility.Collapsed;
+                OptionsGif.Visibility = Visibility.Collapsed;
+            }
+
+        }
+
+        private void OptionButton_Click2(object sender, RoutedEventArgs e)
+        {
+            stackpanel2.Visibility = Visibility.Visible;
+            stackpanel2.HorizontalAlignment = HorizontalAlignment.Center;
+            OptionsGif.Visibility = Visibility.Visible;
+            stackpanel3.Visibility = Visibility.Collapsed;
+            option = STATE.PAUSE;
+
+        }
 
         private void OptionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -109,15 +156,32 @@ namespace Story_of_my_life
             l0.Visibility = Visibility.Visible;
             OptionsGif.Source = new Uri(Resource.get_File_Path("Blood.gif"));
             OptionsGif.Visibility = Visibility.Visible;
+            option = STATE.OptionMain;
         }
 
-        private void StartButton_Click(object sender, RoutedEventArgs e)
+        private void ResumeButton_Click(object sender, RoutedEventArgs e)
         {
-            stackpanel1.Visibility = Visibility.Collapsed;
-            LStory.Visibility = Visibility.Collapsed;
+            stackpanel3.Visibility = Visibility.Collapsed;
+            esc.Visibility = Visibility.Collapsed;
+            value = STATE.GAME;
+        }
 
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            value = STATE.SAVE;
+        }
+        #endregion
 
+        #region Sonstiges
+        private void Slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            volume = Convert.ToInt32(e.NewValue);
+            player.settings.volume = volume;
+        }
 
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -125,16 +189,83 @@ namespace Story_of_my_life
             player.controls.play();
         }
 
-        private void BacktoMenuButton_Click(object sender, RoutedEventArgs e)
+        private void OptionGif_MediaEnded(object sender, RoutedEventArgs e)
         {
-            stackpanel1.Visibility = Visibility.Visible;
-            stackpanel2.Visibility = Visibility.Collapsed;
-            //gif anhalten
-            l0.Visibility = Visibility.Collapsed;
-            OptionsGif.Visibility = Visibility.Collapsed;
-            SaveChanges(volume, resolution);
-
+            OptionsGif.Position = new TimeSpan(0, 0, 1);
+            OptionsGif.Play();
         }
+        #endregion
+
+        #region SelectingWindowStateC
+        private void comb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem cbi = (ComboBoxItem)comb1.SelectedItem;
+            resolution = cbi.Name;
+
+            if (resolution == "Full")
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+            else if (resolution == "high")
+            {
+                this.WindowState = WindowState.Normal;
+                CustomWidth = 1280;
+                CustomHeight = 720;
+            }
+            else if (resolution == "min")
+            {
+                this.WindowState = WindowState.Normal;
+                CustomWidth = 640;
+                CustomHeight = 480;
+            }
+            else if (resolution == "norm")
+            {
+                this.WindowState = WindowState.Normal;
+                CustomWidth = 525;
+                CustomHeight = 350;
+            }
+        }
+        #endregion
+
+        #region GameControl
+        private void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    if (!esc_active)
+                    {
+                        ImageBrush imgBrush = new ImageBrush();
+                        imgBrush.ImageSource = new BitmapImage(new Uri(Resource.get_File_Path("EscapePic.png")));
+                        esc.Fill = imgBrush;
+                        stackpanel1.Visibility = Visibility.Collapsed;
+                        esc.Visibility = Visibility.Visible;
+                        stackpanel3.Visibility = Visibility.Visible;
+                        esc_active = true;
+                        value = STATE.PAUSE;
+                    }
+                    else
+                    {
+                        stackpanel1.Visibility = Visibility.Visible;
+                        esc.Visibility = Visibility.Collapsed;
+                        stackpanel3.Visibility = Visibility.Collapsed;
+                        esc_active = false;
+                        value = STATE.GAME;
+                    }
+                    break;
+                case Key.Up:
+                    break;
+                case Key.Down:
+                    break;
+                case Key.Left:
+                    break;
+                case Key.Right:
+                    break;
+                case Key.Enter:
+                    break;
+            }
+        }
+        #endregion
 
         #region SaveOptionData
         public void SaveChanges(int volume, string resolution)
@@ -176,64 +307,5 @@ namespace Story_of_my_life
             }
         }
         #endregion
-
-        private void Slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            volume = Convert.ToInt32(e.NewValue);
-            player.settings.volume = volume;
-        }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void comb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem cbi = (ComboBoxItem)comb1.SelectedItem;
-            resolution = cbi.Name;
-
-            if (resolution == "Full")
-            {
-                this.WindowState = WindowState.Maximized;
-            }
-            else if (resolution == "high")
-            {
-                this.WindowState = WindowState.Normal;
-                CustomWidth = 1280;
-                CustomHeight = 720;
-            }
-            else if (resolution == "min")
-            {
-                this.WindowState = WindowState.Normal;
-                CustomWidth = 640;
-                CustomHeight = 480;
-            }
-            else if (resolution == "norm")
-            {
-                this.WindowState = WindowState.Normal;
-                CustomWidth = 525;
-                CustomHeight = 350;
-            }
-        }
-
-        private void _KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Escape:
-                    break;
-                case Key.Up:
-                    break;
-                case Key.Down:
-                    break;
-                case Key.Left:
-                    break;
-                case Key.Right:
-                    break;
-                case Key.Enter:
-                    break;
-            }
-        }
     }
 }

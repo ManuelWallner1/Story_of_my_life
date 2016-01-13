@@ -136,4 +136,7 @@
   <data name="The_Walking_Dead_Original_Soundtrack___Theme_Song_HD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\The Walking Dead Original Soundtrack - Theme Song HD.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="EscapePic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>EscapePic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
