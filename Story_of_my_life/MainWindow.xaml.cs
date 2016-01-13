@@ -40,7 +40,7 @@ namespace Story_of_my_life
             SAVE
         };
 
-        STATE value;
+        STATE state;
         STATE option;
         #endregion
 
@@ -78,7 +78,7 @@ namespace Story_of_my_life
         {
             InitializeComponent();
             this.DataContext = this;
-            value = STATE.MENU;
+            state = STATE.MENU;
 
             #region SongFix
             string b = Resource.get_File_Path("The Walking Dead Original Soundtrack - Theme Song HD.wav");
@@ -113,7 +113,7 @@ namespace Story_of_my_life
         {
             stackpanel1.Visibility = Visibility.Collapsed;
             LStory.Visibility = Visibility.Collapsed;
-            value = STATE.GAME;
+            state = STATE.GAME;
             //GamePlay
 
 
@@ -163,12 +163,17 @@ namespace Story_of_my_life
         {
             stackpanel3.Visibility = Visibility.Collapsed;
             esc.Visibility = Visibility.Collapsed;
-            value = STATE.GAME;
+            state = STATE.GAME;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            value = STATE.SAVE;
+            state = STATE.SAVE;
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
         #endregion
 
@@ -179,10 +184,7 @@ namespace Story_of_my_life
             player.settings.volume = volume;
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -242,7 +244,7 @@ namespace Story_of_my_life
                         esc.Visibility = Visibility.Visible;
                         stackpanel3.Visibility = Visibility.Visible;
                         esc_active = true;
-                        value = STATE.PAUSE;
+                        state = STATE.PAUSE;
                     }
                     else
                     {
@@ -250,7 +252,7 @@ namespace Story_of_my_life
                         esc.Visibility = Visibility.Collapsed;
                         stackpanel3.Visibility = Visibility.Collapsed;
                         esc_active = false;
-                        value = STATE.GAME;
+                        state = STATE.GAME;
                     }
                     break;
                 case Key.Up:
