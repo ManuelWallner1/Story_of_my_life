@@ -1,0 +1,28 @@
+// Item:
+// Item Name, Item Examine Description, Hidden, Location
+
+// Direction: 
+// Direction Name, Path Description, Travel Location, Is Hidden, Is Locked, Item Required to Unlock
+//============== AREA SETUP ==============\\
+
+@area
+name#Deep Dungeon
+description#You stand infront of a big dark cave. From the inside you can hear small dripping sounds of water falling from the ceiling. Around you is a thick forest. You hear a bird sing from within the forest.
+direction#North,Infront of you their is a long narrow tunnel that plunges deep into the dark cave,,false,true,torch
+direction#South,To the south their is a small path leading back to the forest,Gloomy Forest,false,false,none
+item#Rusty Key, A small rusty key that seam really old,true,On the ground their is a small key,none
+
+
+@area
+name#Gloomy Forest
+description#You stand in the middle of the groovy forest of Ashevale. Trees is surrounding you.
+direction#North,a road leading deeper inside the forest,Deep Dungeon,false,false,none
+direction#West,,Forest of the Damned,false,false,none
+item#Torch, An old torch. It still looks like it's usuable.,false,On the ground a bit away from the clearing their is a Torch,none
+
+@area
+name#Wakky Forest
+description#You stand in the middle of the groovy forest of Ashevale. Trees is surrounding you.
+direction#North,a road leading deeper inside the forest,Deep Dungeon,false,false,none
+direction#West,,Forest of the Damned,false,false,none
+item#Torch, An old torch. It still looks like it's usuable.,false,ground,none
