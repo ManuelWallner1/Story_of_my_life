@@ -66,8 +66,8 @@
 
         </StackPanel>
 
-        <Label Name="LStory" Content="STORY OF MY LIFE" Width="418" Foreground="White" FontFamily="DK Face Your Fears" FontSize="60" Margin="100,250,0,0" VerticalAlignment="Center"/>
-        <Label Name="l0" Content="OPTIONS" Foreground="White" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="DK Face Your Fears" Margin="50,0,0,0" Visibility="Collapsed"/>
+        <Label Name="LStory" Content="STORY OF MY LIFE" Width="418" Foreground="White" FontFamily="./Res/#DK Face Your Fears" FontSize="60" Margin="100,250,0,0" VerticalAlignment="Center"/>
+        <Label Name="l0" Content="OPTIONS" Foreground="White" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="./Res/#DK Face Your Fears" Margin="50,0,0,0" Visibility="Collapsed"/>
 
         <MediaElement x:Name="OptionsGif" MediaEnded="OptionGif_MediaEnded" UnloadedBehavior="Manual"
                       LoadedBehavior="Play" Stretch="None" Margin="0,50,300,0" Width="230" 
