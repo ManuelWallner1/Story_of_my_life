@@ -79,7 +79,7 @@ namespace Story_of_my_life
             InitializeComponent();
             this.DataContext = this;
             state = STATE.MENU;
-
+            
             #region SongFix
             string b = Resource.get_File_Path("The Walking Dead Original Soundtrack - Theme Song HD.wav");
             pathSaveData = System.IO.Path.GetFullPath(Resource.Resource_Path + "..\\" + "Properties.txt");

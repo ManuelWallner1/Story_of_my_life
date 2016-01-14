@@ -12,7 +12,7 @@ namespace Story_of_my_life
         public static string Resource_Path {
             get {
 
-                return Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\Resources\");
+                return Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\Res\");
 
                 //string[] a = AppDomain.CurrentDomain.BaseDirectory.Split('\\');
                 //for (int i = 0; i < a.Length; i++)
